@@ -63,7 +63,7 @@ class MultipanelPlot(object):
     def __init__(self, post, saveplot=None, epoch=2450000, yscale_auto=False, yscale_sigma=3.0,
                  phase_nrows=None, phase_ncols=None, uparams=None, telfmts={}, legend=True,
                  phase_limits=[], nobin=False, phasetext_size='large', rv_phase_space=0.08,
-                 figwidth=7.5, fit_linewidth=2.0, set_xlim=None, text_size=9, highlight_last=False,
+                 figwidth=7.5, fit_linewidth=2.0, set_xlim=None, set_ylim=None, text_size=9, highlight_last=False,
                  show_rms=False, legend_kwargs=dict(loc='best'), status=None):
 
         self.post = copy.deepcopy(post)
@@ -85,6 +85,7 @@ class MultipanelPlot(object):
         self.figwidth = figwidth
         self.fit_linewidth = fit_linewidth
         self.set_xlim = set_xlim
+        self.set_ylim = set_ylim
         self.highlight_last = highlight_last
         self.show_rms = show_rms
         self.legend_kwargs = legend_kwargs
@@ -314,7 +315,7 @@ class MultipanelPlot(object):
 
         if not self.yscale_auto: 
             scale = np.std(rvdatcat)
-            ax.set_ylim(-self.yscale_sigma*scale, self.yscale_sigma*scale)
+            ax.set_ylim(-self.yscale_sigma*scale-200, self.yscale_sigma*scale)
         
         keys = [p+str(pnum) for p in ['per', 'k', 'e']]
 
